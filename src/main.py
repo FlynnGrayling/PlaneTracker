@@ -29,6 +29,8 @@ def main():
         print("Successful Get")
         print("API Response (JSON):")
         print(data)
+        callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != ""]
+        print(callsigns)
 
     generateMap()
 
