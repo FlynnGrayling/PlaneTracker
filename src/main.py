@@ -32,7 +32,7 @@ def main():
         callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != ""]
         print(callsigns)
 
-    generateMap()
+    generateMap(callSigns=callsigns)
 
 if __name__ == "__main__":
     main()
