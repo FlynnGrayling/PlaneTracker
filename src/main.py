@@ -1,5 +1,6 @@
 from Tracker import get_states
 from Services import generateMap
+from Services import generateHistory
 from staticmap import StaticMap, CircleMarker
 
 def main():
@@ -33,6 +34,7 @@ def main():
         print(callsigns)
 
     generateMap(callSigns=callsigns)
+    generateHistory()
 
 if __name__ == "__main__":
     main()
