@@ -7,7 +7,7 @@ def generateMap (callSigns):
     m = StaticMap(600, 400)
 
     # Add a marker (longitude FIRST then latitude)
-    marker = CircleMarker((153.032328, -27.464173), 'blue', 12)  # Tingalpa
+    marker = CircleMarker((153.085000, -27.500000), 'blue', 12)  # Tingalpa
     m.add_marker(marker)
 
     # Render the map to an image

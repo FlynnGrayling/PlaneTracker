@@ -1,16 +1,24 @@
-import math
+rows, cols = 4, 6
+pixel_width, pixel_height = 400, 600
 
-def lonlat_to_pixel(lon, lat, zoom, tile_size=256):
-    # Convert lat/lon to mercator projection
-    sin_lat = math.sin(lat * math.pi / 180.0)
+latMin, latMax = -27.58, -27.42
+lonMin, lonMax = 153, 153.17
 
-    # Number of tiles across at this zoom level
-    n = 2.0 ** zoom
+def plotCoords (lat, lon):
+    # Size of one cell in world coordinates
+    cell_width = (latMax - latMin) / cols
+    cell_height = (lonMax - lonMin) / rows
 
-    # X coordinate in pixels
-    x = (lon + 180.0) / 360.0 * n * tile_size
+    # Find col/row index
+    col = int((lat - latMin) / cell_width)
+    row = int((lon - lonMin) / cell_height)
 
-    # Y coordinate in pixels
-    y = (0.5 - math.log((1 + sin_lat) / (1 - sin_lat)) / (4 * math.pi)) * n * tile_size
+    # Clamp to valid grid
+    col = min(max(col, 0), cols - 1)
+    row = min(max(row, 0), rows - 1)
 
-    return (x, y)
+    # Pixel center
+    px_center_x = (col + 0.5) * (pixel_width / cols)
+    px_center_y = (row + 0.5) * (pixel_height / rows)
+
+    return row, col, (px_center_x, px_center_y)

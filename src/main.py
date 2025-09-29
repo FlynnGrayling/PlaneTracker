@@ -1,14 +1,19 @@
 from Tracker import get_states
+from Tracker import plotCoords
 from Services import generateMap
 from Services import generateHistory
 from staticmap import StaticMap, CircleMarker
 
 def main():
     # bounding box properties (fixed coordinates)
-    lamin = -27.587055  # lower latitude
-    lamax = -27.331283  # higher latitude
-    lomin = 153.032749  # lower longitude
-    lomax = 153.158092  # higher longitude
+    lamin = -27.580000  # lower latitude
+    lamax = -27.420000 # higher latitude
+    lomin = 153.000000  # lower longitude
+    lomax = 153.170000  # higher longitude
+
+    #middle coord values for map title
+    lamid = lamin + lamax / 2 #-27.500000
+    lomid = lomin + lomax / 2 #153.085000
 
     # define query parameters as dictionary
     params = {
@@ -35,6 +40,11 @@ def main():
 
     generateMap(callSigns=callsigns)
     generateHistory()
+
+
+    lat, lon = 23, 87  # incoming coordinate
+    row, col, center = plotCoords(lat = lat, lon = lon)
+    print(f"Coord ({lat},{y}) → cell ({row},{col}), pixel center {center}")
 
 if __name__ == "__main__":
     main()
