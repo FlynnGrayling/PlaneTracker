@@ -2,7 +2,7 @@ from staticmap import StaticMap, CircleMarker
 from PIL import Image, ImageDraw, ImageFont
 
 
-def generateMap (callSigns):
+def generateMap (callSigns, pixX, pixY):
     # Create a map (size in pixels)
     m = StaticMap(600, 400)
 
@@ -24,27 +24,28 @@ def generateMap (callSigns):
         font = ImageFont.load_default()
 
 
-    for i, text in enumerate(callSigns):
-        # Calculate vertical placement
-        y_offset = 25
-        text_x = 75
-        text_y = 33.3 + i * y_offset
+    
+    # Calculate vertical placement
+    y_offset = 25
+    text = callSigns
+    text_x = pixX
+    text_y = pixY 
 
-        # Get text bounding box
-        bbox = draw.textbbox((text_x, text_y), text, font=font)
-        text_w = bbox[2] - bbox[0]
-        text_h = bbox[3] - bbox[1]
+    # Get text bounding box
+    bbox = draw.textbbox((text_x, text_y), text, font=font)
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
 
-        # Draw rectangle
-        padding = 4
-        box_coords = [
-            (text_x - padding, text_y - padding),
-            (text_x + text_w + padding, text_y + text_h + padding)
-        ]
-        draw.rectangle(box_coords, fill="white", outline="black")
+    # Draw rectangle
+    padding = 4
+    box_coords = [
+        (text_x - padding, text_y - padding),
+        (text_x + text_w + padding, text_y + text_h + padding)
+    ]
+    draw.rectangle(box_coords, fill="white", outline="black")
 
-        # Draw text
-        draw.text((text_x, text_y), text, font=font, fill="black")
+    # Draw text
+    draw.text((text_x, text_y), text, font=font, fill="black")
 
     image.save("map.png")
     image.show()

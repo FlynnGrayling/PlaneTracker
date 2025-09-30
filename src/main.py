@@ -35,17 +35,26 @@ def main():
     #     print("Successful Get")
     #     print("API Response (JSON):")
     #     print(data)
-    #     callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != ""]
+    #     callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
     #     print(callsigns)
 
-    callsigns = "T"
-    generateMap(callSigns=callsigns)
+    
     # generateHistory()
 
+    #get flight lon and lat
+    # lat = [state[6] for state in data['states'] if state[6] != "NoLat"]
+    # lon = [state[5] for state in data['states'] if state[5] != "NoLon"]
 
-    lat, lon = -27.43, 153.1  # incoming coordinate
-    row, col, center = plotCoords(lat = lat, lon = lon)
-    print(f"Coord ({lat},{lon}) → cell ({row},{col}), pixel center x then y{center}")
+    #testing
+    callsigns = "VOC290"
+    lat = -27.44
+    lon = 152.1
+
+    #convert lon/lat to pixelcoords
+    row, col, pixX, pixY = plotCoords(lat = lat, lon = lon)
+    print(f"Coord ({lat},{lon}) → cell ({row},{col}), pixel center x then y ({pixX},{pixY})")
+
+    generateMap(callSigns=callsigns, pixX=pixX, pixY=pixY )
 
 if __name__ == "__main__":
     main()

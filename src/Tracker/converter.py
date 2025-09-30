@@ -18,7 +18,7 @@ def plotCoords(lat, lon):
     row = min(max(row, 0), rows - 1)
 
     # Pixel center
-    px_center_x = (col + 0.5) * (width / cols)
+    px_center_x = (col + 0.2) * (width / cols)
     px_center_y = (row + 0.5) * (height / rows)
 
-    return row, col, (px_center_x, px_center_y)
+    return row, col, px_center_x, px_center_y
