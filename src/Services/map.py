@@ -27,8 +27,8 @@ def generateMap (callSigns):
     for i, text in enumerate(callSigns):
         # Calculate vertical placement
         y_offset = 25
-        text_x = 300
-        text_y = 200 + i * y_offset
+        text_x = 75
+        text_y = 33.3 + i * y_offset
 
         # Get text bounding box
         bbox = draw.textbbox((text_x, text_y), text, font=font)

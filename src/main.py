@@ -29,22 +29,23 @@ def main():
     username = ""
     password = ""
 
-    data = get_states(params=params, username=username, password=password)
+    # data = get_states(params=params, username=username, password=password)
 
-    if data:
-        print("Successful Get")
-        print("API Response (JSON):")
-        print(data)
-        callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != ""]
-        print(callsigns)
+    # if data:
+    #     print("Successful Get")
+    #     print("API Response (JSON):")
+    #     print(data)
+    #     callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != ""]
+    #     print(callsigns)
 
+    callsigns = "T"
     generateMap(callSigns=callsigns)
-    generateHistory()
+    # generateHistory()
 
 
-    lat, lon = 23, 87  # incoming coordinate
+    lat, lon = -27.43, 153.1  # incoming coordinate
     row, col, center = plotCoords(lat = lat, lon = lon)
-    print(f"Coord ({lat},{y}) → cell ({row},{col}), pixel center {center}")
+    print(f"Coord ({lat},{lon}) → cell ({row},{col}), pixel center x then y{center}")
 
 if __name__ == "__main__":
     main()
