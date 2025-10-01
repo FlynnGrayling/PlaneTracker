@@ -48,17 +48,17 @@ def main():
     #testing
     callsigns = "VOC290"
     lat = -27.5
-    lon = 153.5
+    lon = 153
 
-    #flight details list
-    #flights = [["VOC290", -27.44, 152.1],
-               #["QAZ290", -27.5, ]]
+    #flight details list, calsign, lat, lon, pixX, pixY
+    flights = [["VOC290", -27.44, 153.0, 0, 0],
+               ["QAZ290", -27.5, 153.15, 0, 0]]
 
-    #convert lon/lat to pixelcoords
-    row, col, pixX, pixY = plotCoords(lat = lat, lon = lon)
-    print(f"Coord ({lat},{lon}) → cell ({row},{col}), pixel center x then y ({pixX},{pixY})")
+    for plane in flights:
+        #convert lon/lat to pixelcoords
+        plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
-    generateMap(callSigns=callsigns, pixX=pixX, pixY=pixY )
+        generateMap(callSigns=plane[0], pixX=plane[3], pixY=plane[4] )
 
 if __name__ == "__main__":
     main()

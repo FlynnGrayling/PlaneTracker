@@ -23,5 +23,5 @@ def plotCoords(lat, lon):
     px_center_x = (col + 0.2) * (width / cols)
     px_center_y = (row + 0.5) * (height / rows)
 
-    return row, col, px_center_x, px_center_y
+    return px_center_x, px_center_y
 
