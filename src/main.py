@@ -47,8 +47,12 @@ def main():
 
     #testing
     callsigns = "VOC290"
-    lat = -27.44
-    lon = 152.1
+    lat = -27.5
+    lon = 153.5
+
+    #flight details list
+    #flights = [["VOC290", -27.44, 152.1],
+               #["QAZ290", -27.5, ]]
 
     #convert lon/lat to pixelcoords
     row, col, pixX, pixY = plotCoords(lat = lat, lon = lon)

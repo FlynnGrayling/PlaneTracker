@@ -6,12 +6,14 @@ lonMin, lonMax = 153, 153.17
 
 def plotCoords(lat, lon):
     # Size of one cell in world coordinates
-    cell_width = (latMax - latMin) / cols   # latitude controls X (columns)
-    cell_height = (lonMax - lonMin) / rows  # longitude controls Y (rows)
+    cell_width = (lonMax - lonMin) / cols    # longitude -> X (columns)
+    cell_height = (latMax - latMin) / rows   # latitude -> Y (rows)
 
-    # Find col/row index
-    col = int((lat - latMin) / cell_width)   # X index from latitude
-    row = int((lon - lonMin) / cell_height)  # Y index from longitude
+    # Column index from longitude
+    col = int((lon - lonMin) / cell_width)
+
+    # Row index from latitude (flip because y increases downward)
+    row = int((latMax - lat) / cell_height)
 
     # Clamp to valid grid
     col = min(max(col, 0), cols - 1)
@@ -22,3 +24,4 @@ def plotCoords(lat, lon):
     px_center_y = (row + 0.5) * (height / rows)
 
     return row, col, px_center_x, px_center_y
+
