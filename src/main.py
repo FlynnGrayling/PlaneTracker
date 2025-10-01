@@ -53,12 +53,15 @@ def main():
     #flight details list, calsign, lat, lon, pixX, pixY
     flights = [["VOC290", -27.44, 153.0, 0, 0],
                ["QAZ290", -27.5, 153.15, 0, 0]]
+    
+    
 
     for plane in flights:
         #convert lon/lat to pixelcoords
         plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
-        generateMap(callSigns=plane[0], pixX=plane[3], pixY=plane[4] )
+
+    generateMap(flights)
 
 if __name__ == "__main__":
     main()
