@@ -29,14 +29,19 @@ def main():
     username = ""
     password = ""
 
-    # data = get_states(params=params, username=username, password=password)
+    data = get_states(params=params, username=username, password=password)
 
-    # if data:
-    #     print("Successful Get")
-    #     print("API Response (JSON):")
-    #     print(data)
-    #     callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
-    #     print(callsigns)
+    if data:
+        print("Successful Get")
+        print("API Response (JSON):")
+        print(data)
+        #callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
+        flights = [
+            [state[1].strip(), state[6], state[5], 0, 0]
+            for state in data['states']
+            if state[1].strip() != "NoCallsign" and state[6] != "NoLat" and state[5] != "NoLon"
+        ]
+        print(flights)
 
     
     # generateHistory()
@@ -46,16 +51,15 @@ def main():
     # lon = [state[5] for state in data['states'] if state[5] != "NoLon"]
 
     #testing
-    callsigns = "VOC290"
-    lat = -27.5
-    lon = 153
+    # callsigns = "VOC290"
+    # lat = -27.5
+    # lon = 153
 
-    #flight details list, calsign, lat, lon, pixX, pixY
-    flights = [["VOC290", -27.44, 153.0, 0, 0],
-               ["QAZ290", -27.5, 153.15, 0, 0]]
+    #flight details for testing list, calsign, lat, lon, pixX, pixY
+    # flights = [["VOC290", -27.44, 153.0, 0, 0],
+    #            ["QAZ290", -27.5, 153.15, 0, 0]]
     
     
-
     for plane in flights:
         #convert lon/lat to pixelcoords
         plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
