@@ -1,14 +1,17 @@
 from PIL import Image, ImageDraw, ImageFont
 
-def generateHistory():
+def generateHistory(flights):
     # Example data (from API)
-    flights = [
-        {"Callsign": "QAZ477", "Departure Country": "Australia", "Time": "06:30am"},
-        {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "12:30pm"},
-        {"Callsign": "AA2071", "Departure Country": "America", "Time": "12:30pm"},
-        {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "01:30pm"},
-        {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "09:30pm"},
-    ]
+    # flights = [
+    #     {"Callsign": "QAZ477", "Departure Country": "Australia", "Time": "06:30am"},
+    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "12:30pm"},
+    #     {"Callsign": "AA2071", "Departure Country": "America", "Time": "12:30pm"},
+    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "01:30pm"},
+    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "09:30pm"},
+    # ]
+
+    #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
+    # flights = [["VOC290", -27.44, 153.0, 0, 0, "", 0],
 
     # Image settings
     cell_widths = [200, 300, 150]  # Widths for each column
@@ -17,8 +20,8 @@ def generateHistory():
     padding = 10
 
     # Calculate image size
-    img_width = sum(cell_widths) + 20
-    img_height = header_height + len(flights) * row_height + 20
+    img_width = 600
+    img_height = 400
 
     # Create blank white image
     img = Image.new("RGB", (img_width, img_height), "white")
@@ -38,9 +41,14 @@ def generateHistory():
         return bbox[2] - bbox[0], bbox[3] - bbox[1]
 
     # Draw title
-    title = "Past Flights"
+    title = "Recent Flights"
     title_w, title_h = get_text_size(title, header_font)
     draw.text(((img_width - title_w) / 2, 10), title, font=header_font, fill="black")
+
+    #Draw table
+    y = header_height + row_height
+    x = 10
+    draw.rectangle([x, y, x + cell_widths[0], y + row_height], outline="black", width=3)
 
     # Table headers
     headers = ["Callsign", "Departure Country", "Time"]
@@ -55,17 +63,17 @@ def generateHistory():
         x += cell_widths[i]
 
     # Table rows
-    y = header_height + row_height
-    for flight in flights:
-        x = 10
-        for i, key in enumerate(headers):
-            draw.rectangle([x, y, x + cell_widths[i], y + row_height], outline="black", width=3)
-            value = flight[key]
-            text_w, text_h = get_text_size(value, cell_font)
-            draw.text((x + (cell_widths[i] - text_w) / 2, y + (row_height - text_h) / 2),
-                    value, font=cell_font, fill="black")
-            x += cell_widths[i]
-        y += row_height
+    # y = header_height + row_height
+    # for flight in flights:
+    #     x = 10
+    #     for i, key in enumerate(headers):
+    #         draw.rectangle([x, y, x + cell_widths[i], y + row_height], outline="black", width=3)
+    #         value = flight[0]
+    #         text_w, text_h = get_text_size(value, cell_font)
+    #         draw.text((x + (cell_widths[i] - text_w) / 2, y + (row_height - text_h) / 2),
+    #                 value, font=cell_font, fill="black")
+    #         x += cell_widths[i]
+    #     y += row_height
 
     # Save image
     img.save("flights_table.png")
