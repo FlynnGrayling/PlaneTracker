@@ -15,7 +15,7 @@ def generateHistory(flights):
 
     # Image settings
     cell_widths = [120, 350, 120]  # Widths for each column
-    row_height = 60
+    row_height = 55
     header_height = 80
     padding = 10
 
@@ -59,11 +59,15 @@ def generateHistory(flights):
     #     x += cell_widths[i]
 
     #draw callsign rows
-    y_increment = [0, 60, 120, 180, 240, 300]
+    y_increment = [0, 55, 110, 165, 220, 275, 330]
     x = 5
-    y = 60
-    for i in range(5):
+    y = 55
+    x1 = 125
+    x2 = 475
+    for i in range(6):
         draw.rectangle([x, y + y_increment[i] , x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
+        draw.rectangle([x1, y + y_increment[i] , x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
+        draw.rectangle([x2, y + y_increment[i] , x2 + cell_widths[2], y + row_height + y_increment[i]], outline="black", width=3)
         
 
     # Table rows
