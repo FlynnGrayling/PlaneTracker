@@ -30,9 +30,11 @@ def generateHistory(flights):
     # Load font (fallback to default if not available)
     try:
         header_font = ImageFont.truetype("arialbd.ttf", 28)
+        cell_header = ImageFont.truetype("arial.ttf", 26)
         cell_font = ImageFont.truetype("arial.ttf", 22)
     except:
         header_font = ImageFont.load_default()
+        cell_header = ImageFont.load_default()
         cell_font = ImageFont.load_default()
 
     # Helper function to get text width & height from bbox
@@ -45,19 +47,6 @@ def generateHistory(flights):
     title_w, title_h = get_text_size(title, header_font)
     draw.text(((img_width - title_w) / 2, 10), title, font=header_font, fill="black")
 
-
-    # Table headers
-    headers = ["Callsign", "Departure Country", "Time"]
-
-    # x = 5
-    # y = header_height
-    # for i, header in enumerate(headers):
-    #     draw.rectangle([x, y, x + cell_widths[i], y + row_height], outline="black", width=3)
-    #     text_w, text_h = get_text_size(header, cell_font)
-    #     draw.text((x + (cell_widths[i] - text_w) / 2, y + (row_height - text_h) / 2),
-    #             header, font=cell_font, fill="black")
-    #     x += cell_widths[i]
-
     #draw callsign rows
     y_increment = [0, 55, 110, 165, 220, 275, 330]
     x = 5
@@ -68,20 +57,25 @@ def generateHistory(flights):
         draw.rectangle([x, y + y_increment[i] , x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
         draw.rectangle([x1, y + y_increment[i] , x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
         draw.rectangle([x2, y + y_increment[i] , x2 + cell_widths[2], y + row_height + y_increment[i]], outline="black", width=3)
-        
 
-    # Table rows
-    # y = header_height + row_height
-    # for flight in flights:
-    #     x = 10
-    #     for i, key in enumerate(headers):
-    #         draw.rectangle([x, y, x + cell_widths[i], y + row_height], outline="black", width=3)
-    #         value = flight[0]
-    #         text_w, text_h = get_text_size(value, cell_font)
-    #         draw.text((x + (cell_widths[i] - text_w) / 2, y + (row_height - text_h) / 2),
-    #                 value, font=cell_font, fill="black")
-    #         x += cell_widths[i]
-    #     y += row_height
+    # Table headers
+    headers = ["Callsign", "Departure Country", "Time"]
+    
+    #header text
+    header_x_pos = [15, 190, 500]
+    for i, header in enumerate(headers):
+        draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
+
+    #API Text
+    data_x_pos = [15, 225, 500]
+    data_y_pos = [125, 180, 235, 290, 345]
+    for i, plane in enumerate(flights):
+        callsign = plane[0]
+        origin = plane[5]
+        time = plane[6]
+        draw.text([x + data_x_pos[0], data_y_pos[i]], callsign, font=cell_font, fill="black")
+        draw.text([x + data_x_pos[1], data_y_pos[i]], origin, font=cell_font, fill="black")
+        draw.text([x + data_x_pos[2], data_y_pos[i]], str(time), font=cell_font, fill="black")
 
     # Save image
     img.save("flights_table.png")

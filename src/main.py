@@ -53,8 +53,8 @@ def main():
     # lon = 153
 
     #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
-    flights = [["VOC290", -27.44, 153.0, 0, 0, "", 0],
-               ["QAZ290", -27.5, 153.15, 0, 0]]
+    flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
+               ["QAZ290", -27.5, 153.15, 0, 0, "Singapore", 27000]]
     
     
     #for plane in flights:
