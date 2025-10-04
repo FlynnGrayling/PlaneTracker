@@ -3,6 +3,7 @@ from Tracker import plotCoords
 from Services import generateMap
 from Services import generateHistory
 from staticmap import StaticMap, CircleMarker
+import time
 
 def main():
     # bounding box properties (fixed coordinates)
@@ -25,46 +26,48 @@ def main():
         "lomax": lomax,
     }
 
+    #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
+    # flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
+    #            ["VOC291", -27.5, 153.15, 0, 0, "Singapore", 27000],
+    #            ["VOC292", -27.5, 153.15, 0, 0, "Brasil", 27000],
+    #            ["VOC293", -27.5, 153.15, 0, 0, "England", 27000],
+    #            ["VOC294", -27.5, 153.15, 0, 0, "New Zealand", 27000],
+    #            ["VOC295", -27.5, 153.15, 0, 0, "Mexico", 27000],]
+
+
     # Add your OpenSky Network credentials
     username = ""
     password = ""
 
-    # data = get_states(params=params, username=username, password=password)
+    while True:
+        #clear/ instantiate list
+        flights = []
+        
+        #call API
+        data = get_states(params=params, username=username, password=password)
 
-    # if data:
-    #     print("Successful Get")
-    #     print("API Response (JSON):")
-    #     print(data)
-    #     #callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
-    #     flights = [
-    #         [state[1].strip(), state[6], state[5], 0, 0, state[2].strip(), state[3]]
-    #         for state in data['states']
-    #         if state[1].strip() != "NoCallsign" and state[6] != "NoLat" and state[5] != "NoLon"
-    #     ]
-    #     print(flights)
+        #if response parse wanted data to Flights list
+        if data:
+            print("Successful Get")
+            print("API Response (JSON):")
+            print(data)
+            #callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
+            flights = [
+                [state[1].strip(), state[6], state[5], 0, 0, state[2].strip(), state[3]]
+                for state in data['states']
+                if state[1].strip() != "NoCallsign" and state[6] != "NoLat" and state[5] != "NoLon"
+            ]
+            print(flights)
+        
+        for plane in flights:
+            #convert lon/lat to pixelcoords
+            plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
-    #get flight lon and lat
-    # lat = [state[6] for state in data['states'] if state[6] != "NoLat"]
-    # lon = [state[5] for state in data['states'] if state[5] != "NoLon"]
+        generateMap(flights)
 
-    #testing
-    # callsigns = "VOC290"
-    # lat = -27.5
-    # lon = 153
+        #generateHistory(flights)
 
-    #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
-    flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
-               ["QAZ290", -27.5, 153.15, 0, 0, "Singapore", 27000]]
-    
-    
-    #for plane in flights:
-        #convert lon/lat to pixelcoords
-        #plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
-
-
-    #generateMap(flights)
-
-    generateHistory(flights)
+        time.sleep(60)
 
 if __name__ == "__main__":
     main()

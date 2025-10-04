@@ -13,6 +13,23 @@ def generateHistory(flights):
     #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
     # flights = [["VOC290", -27.44, 153.0, 0, 0, "", 0],
 
+    #recent history list
+    recent_flight = []
+
+    for plane in flights:
+        # skip if callsign already exists
+        if any(plane[0] == records[0] for records in recent_flight):
+            continue
+
+        #insert Callsign, Origin and Time from flights
+        recent_flight.insert(0, (plane[0], plane[5], plane[6]))
+
+        #shorten list if it is longer than 5
+        if len(recent_flight) > 5:
+            recent_flight = recent_flight[:5]
+    
+    print(recent_flight)
+
     # Image settings
     cell_widths = [120, 350, 120]  # Widths for each column
     row_height = 55
@@ -69,10 +86,10 @@ def generateHistory(flights):
     #API Text
     data_x_pos = [15, 225, 500]
     data_y_pos = [125, 180, 235, 290, 345]
-    for i, plane in enumerate(flights):
+    for i, plane in enumerate(recent_flight):
         callsign = plane[0]
-        origin = plane[5]
-        time = plane[6]
+        origin = plane[1]
+        time = plane[2]
         draw.text([x + data_x_pos[0], data_y_pos[i]], callsign, font=cell_font, fill="black")
         draw.text([x + data_x_pos[1], data_y_pos[i]], origin, font=cell_font, fill="black")
         draw.text([x + data_x_pos[2], data_y_pos[i]], str(time), font=cell_font, fill="black")

@@ -1,5 +1,6 @@
 from staticmap import StaticMap, CircleMarker
 from PIL import Image, ImageDraw, ImageFont
+import time
 
 
 def generateMap (flights):
