@@ -65,7 +65,7 @@ def main():
 
         generateMap(flights)
 
-        #generateHistory(flights)
+        generateHistory(flights)
 
         time.sleep(60)
 
