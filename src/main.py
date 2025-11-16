@@ -40,10 +40,12 @@ def main():
     username = ""
     password = ""
 
+    storedFlights = []  # Initialize before loop
+
     while True:
-        # #clear/ instantiate list
+        #clear/ instantiate lists
         # flights = []
-        
+
         # #call API
         # data = get_states(params=params, username=username, password=password)
 
@@ -60,11 +62,21 @@ def main():
         #     ]
         #     print(flights)
         
-        for plane in flights:
-            #convert lon/lat to pixelcoords
-            plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
+        # for plane in flights:
+        #     #convert lon/lat to pixelcoords
+        #     plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
-        setImage(flights)
+        # Compare callsigns and positions instead of full lists
+        current_callsigns = {plane[0]: (plane[1], plane[2]) for plane in flights}
+        stored_callsigns = {plane[0]: (plane[1], plane[2]) for plane in storedFlights}
+        
+        if current_callsigns != stored_callsigns:
+            print("Flight data changed - updating display")
+            setImage(flights)
+        else:
+            print("No changes detected")
+
+        storedFlights = flights
 
         time.sleep(60)
 
