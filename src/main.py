@@ -63,9 +63,9 @@ def main():
         #     ]
         #     print(flights)
         
-        # for plane in flights:
-        #     #convert lon/lat to pixelcoords
-        #     plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
+        for plane in flights:
+            #convert lon/lat to pixelcoords
+            plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
         # Compare callsigns and positions instead of full lists
         current_callsigns = {plane[0]: (plane[1], plane[2]) for plane in flights}

@@ -8,7 +8,7 @@ def generateMap (flights):
     m = StaticMap(600, 400)
 
     # Add a marker for home (longitude FIRST then latitude)
-    marker = CircleMarker((153.085000, -27.500000), 'black', 12)  # Tingalpa
+    marker = CircleMarker((153.030000, -27.466500), 'black', 12)  # Tingalpa
     m.add_marker(marker)
     
 
@@ -27,9 +27,9 @@ def generateMap (flights):
 
     #draw HOME Box
     #set name and pixel position
-    text = "Home"
-    text_x = -27.44
-    text_y = 153.0
+    text = "HOME"
+    text_x = 20
+    text_y = 150
 
         # Get text bounding box
     bbox = draw.textbbox((text_x, text_y), text, font=font)
