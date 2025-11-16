@@ -28,12 +28,12 @@ def main():
     }
 
     #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
-    # flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
-    #            ["VOC291", -27.48, 153.15, 0, 0, "Singapore", 27000],
-    #            ["VOC292", -27.5, 153.12, 0, 0, "Brasil", 27000],
-    #            ["VOC293", -27.54, 153.16, 0, 0, "England", 27000],
-    #            ["VOC294", -27.56, 153.0, 0, 0, "New Zealand", 27000],
-    #            ["VOC295", -27.5, 153.1, 0, 0, "Mexico", 27000],]
+    flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
+               ["VOC291", -27.48, 153.15, 0, 0, "Singapore", 27000],
+               ["VOC292", -27.5, 153.12, 0, 0, "Brasil", 27000],
+               ["VOC293", -27.54, 153.16, 0, 0, "England", 27000],
+               ["VOC294", -27.56, 153.0, 0, 0, "New Zealand", 27000],
+               ["VOC295", -27.5, 153.1, 0, 0, "Mexico", 27000],]
 
 
     # Add your OpenSky Network credentials
@@ -44,28 +44,28 @@ def main():
     displayCount = 0
 
     while True:
-        #clear/ instantiate lists
-        flights = []
+        # #clear/ instantiate lists
+        # flights = []
 
-        #call API
-        data = get_states(params=params, username=username, password=password)
+        # #call API
+        # data = get_states(params=params, username=username, password=password)
 
-        #if response parse wanted data to Flights list
-        if data:
-            print("Successful Get")
-            print("API Response (JSON):")
-            print(data)
-            #callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
-            flights = [
-                [state[1].strip(), state[6], state[5], 0, 0, state[2].strip(), state[3]]
-                for state in data['states']
-                if state[1].strip() != "NoCallsign" and state[6] != "NoLat" and state[5] != "NoLon"
-            ]
-            print(flights)
+        # #if response parse wanted data to Flights list
+        # if data:
+        #     print("Successful Get")
+        #     print("API Response (JSON):")
+        #     print(data)
+        #     #callsigns = [state[1].strip() for state in data['states'] if state[1].strip() != "NoCallsign"]
+        #     flights = [
+        #         [state[1].strip(), state[6], state[5], 0, 0, state[2].strip(), state[3]]
+        #         for state in data['states']
+        #         if state[1].strip() != "NoCallsign" and state[6] != "NoLat" and state[5] != "NoLon"
+        #     ]
+        #     print(flights)
         
-        for plane in flights:
-            #convert lon/lat to pixelcoords
-            plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
+        # for plane in flights:
+        #     #convert lon/lat to pixelcoords
+        #     plane[3], plane[4] = plotCoords(lat = plane[1], lon = plane[2])
 
         # Compare callsigns and positions instead of full lists
         current_callsigns = {plane[0]: (plane[1], plane[2]) for plane in flights}
