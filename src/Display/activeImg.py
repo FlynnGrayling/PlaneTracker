@@ -3,12 +3,15 @@ from Services import generateHistory
 import time
 
 
-def setImage(flights):
-    storedFlights = flights 
+def setImage(flights, displayCount):
     
-
-    if(storedFlights == flights):
+    if len(flights) > 0 and displayCount < 10:
         generateMap(flights)
-
+        displayCount = displayCount + 1
+    else:
         generateHistory(flights)
+        displayCount = 0
+
+    print(displayCount)
+    return displayCount
 

@@ -41,6 +41,7 @@ def main():
     password = ""
 
     storedFlights = []  # Initialize before loop
+    displayCount = 0
 
     while True:
         #clear/ instantiate lists
@@ -72,7 +73,7 @@ def main():
         
         if current_callsigns != stored_callsigns:
             print("Flight data changed - updating display")
-            setImage(flights)
+            displayCount = setImage(flights, displayCount)
         else:
             print("No changes detected")
 
