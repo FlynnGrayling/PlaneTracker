@@ -1,5 +1,8 @@
 from PIL import Image, ImageDraw, ImageFont
 
+# Initialize recent_flight as a global variable
+recent_flight = []
+
 def generateHistory(flights):
     # Example data (from API)
     # flights = [
@@ -14,17 +17,17 @@ def generateHistory(flights):
     # flights = [["VOC290", -27.44, 153.0, 0, 0, "", 0],
 
     #recent history list
-    recent_flight = []
+    global recent_flight
 
     for plane in flights:
-        # skip if callsign already exists
+        # Skip if callsign already exists
         if any(plane[0] == records[0] for records in recent_flight):
             continue
 
-        #insert Callsign, Origin and Time from flights
+        # Insert Callsign, Origin, and Time from flights
         recent_flight.insert(0, (plane[0], plane[5], plane[6]))
 
-        #shorten list if it is longer than 5
+        # Shorten list if it is longer than 5
         if len(recent_flight) > 5:
             recent_flight = recent_flight[:5]
     
@@ -64,26 +67,26 @@ def generateHistory(flights):
     title_w, title_h = get_text_size(title, header_font)
     draw.text(((img_width - title_w) / 2, 10), title, font=header_font, fill="black")
 
-    #draw callsign rows
+    # Draw callsign rows
     y_increment = [0, 55, 110, 165, 220, 275, 330]
     x = 5
     y = 55
     x1 = 125
     x2 = 475
     for i in range(6):
-        draw.rectangle([x, y + y_increment[i] , x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
-        draw.rectangle([x1, y + y_increment[i] , x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
-        draw.rectangle([x2, y + y_increment[i] , x2 + cell_widths[2], y + row_height + y_increment[i]], outline="black", width=3)
+        draw.rectangle([x, y + y_increment[i], x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
+        draw.rectangle([x1, y + y_increment[i], x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
+        draw.rectangle([x2, y + y_increment[i], x2 + cell_widths[2], y + row_height + y_increment[i]], outline="black", width=3)
 
     # Table headers
     headers = ["Callsign", "Departure Country", "Time"]
     
-    #header text
+    # Header text
     header_x_pos = [15, 190, 500]
     for i, header in enumerate(headers):
         draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
 
-    #API Text
+    # API Text
     data_x_pos = [15, 225, 500]
     data_y_pos = [125, 180, 235, 290, 345]
     for i, plane in enumerate(recent_flight):
