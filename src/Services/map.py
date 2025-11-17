@@ -10,6 +10,10 @@ def generateMap (flights):
     # Add a marker for home (longitude FIRST then latitude)
     marker = CircleMarker((153.030000, -27.466500), 'black', 12)  # Tingalpa
     m.add_marker(marker)
+
+    # Add a marker for Airport (longitude FIRST then latitude)
+    marker = CircleMarker((153.11, -27.4165), 'black', 12)  # Tingalpa
+    m.add_marker(marker)
     
 
     # Render the map to an image
@@ -31,7 +35,29 @@ def generateMap (flights):
     text_x = 20
     text_y = 150
 
-        # Get text bounding box
+    # Get text bounding box
+    bbox = draw.textbbox((text_x, text_y), text, font=font)
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
+
+    # Draw rectangle
+    padding = 4
+    box_coords = [
+        (text_x - padding, text_y - padding),
+        (text_x + text_w + padding, text_y + text_h + padding)
+    ]
+    draw.rectangle(box_coords, fill="white", outline="black")
+
+    # Draw text
+    draw.text((text_x, text_y), text, font=font, fill="black")
+
+    #draw AIRPORT Box
+    #set name and pixel position
+    text = "AIRPORT"
+    text_x = 242
+    text_y = 20
+
+    # Get text bounding box
     bbox = draw.textbbox((text_x, text_y), text, font=font)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
