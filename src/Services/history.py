@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+from datetime import datetime, timezone, timedelta
 
 # Initialize recent_flight as a global variable
 recent_flight = []
@@ -24,8 +25,13 @@ def generateHistory(flights):
         if any(plane[0] == records[0] for records in recent_flight):
             continue
 
+        #convert unix time to AEST 
+        AEST = timezone(timedelta(hours = 10))
+        aest_time = datetime.fromtimestamp(plane[6], AEST)
+        aest_time_formatted = aest_time.strftime("%I:%M:%S %p")
+
         # Insert Callsign, Origin, and Time from flights
-        recent_flight.insert(0, (plane[0], plane[5], plane[6]))
+        recent_flight.insert(0, (plane[0], plane[5], aest_time_formatted))
 
         # Shorten list if it is longer than 5
         if len(recent_flight) > 5:
@@ -34,7 +40,7 @@ def generateHistory(flights):
     print(recent_flight)
 
     # Image settings
-    cell_widths = [120, 350, 120]  # Widths for each column
+    cell_widths = [120, 300, 170]  # Widths for each column
     row_height = 55
     header_height = 80
     padding = 10
@@ -72,7 +78,7 @@ def generateHistory(flights):
     x = 5
     y = 55
     x1 = 125
-    x2 = 475
+    x2 = 425
     for i in range(6):
         draw.rectangle([x, y + y_increment[i], x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
         draw.rectangle([x1, y + y_increment[i], x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
@@ -82,12 +88,12 @@ def generateHistory(flights):
     headers = ["Callsign", "Departure Country", "Time"]
     
     # Header text
-    header_x_pos = [15, 190, 500]
+    header_x_pos = [15, 170, 480]
     for i, header in enumerate(headers):
         draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
 
     # API Text
-    data_x_pos = [15, 225, 500]
+    data_x_pos = [15, 180, 445]
     data_y_pos = [125, 180, 235, 290, 345]
     for i, plane in enumerate(recent_flight):
         callsign = plane[0]
