@@ -93,7 +93,7 @@ def generateHistory(flights):
         draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
 
     # API Text
-    data_x_pos = [15, 180, 445]
+    data_x_pos = [15, 150, 445]
     data_y_pos = [125, 180, 235, 290, 345]
     for i, plane in enumerate(recent_flight):
         callsign = plane[0]
