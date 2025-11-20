@@ -6,10 +6,13 @@ import time
 def setImage(flights, displayCount):
     
     if len(flights) > 0 and displayCount < 10:
+        displayHistory = False
         generateMap(flights)
+        generateHistory(flights, displayHistory)
         displayCount = displayCount + 1
     else:
-        generateHistory(flights)
+        displayHistory = True
+        generateHistory(flights, displayHistory)
         displayCount = 0
 
     print(displayCount)

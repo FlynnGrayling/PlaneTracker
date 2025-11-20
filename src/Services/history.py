@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 # Initialize recent_flight as a global variable
 recent_flight = []
 
-def generateHistory(flights):
+def generateHistory(flights, displayHistory):
     # Example data (from API)
     # flights = [
     #     {"Callsign": "QAZ477", "Departure Country": "Australia", "Time": "06:30am"},
@@ -103,6 +103,7 @@ def generateHistory(flights):
         draw.text([x + data_x_pos[1], data_y_pos[i]], origin, font=cell_font, fill="black")
         draw.text([x + data_x_pos[2], data_y_pos[i]], str(time), font=cell_font, fill="black")
 
-    # Save image
-    img.save("flights_table.png")
-    img.show()
+    # Save image and display image when appropriate
+    if displayHistory == True:
+        img.save("flights_table.png")
+        img.show()
