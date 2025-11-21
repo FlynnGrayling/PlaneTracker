@@ -1,8 +1,8 @@
 rows, cols = 4, 8
 height, width = 480, 800
 
-latMin, latMax = -27.58, -27.42
-lonMin, lonMax = 153, 153.17
+latMin, latMax = -27.540000, -27.410000
+lonMin, lonMax = 152.990000, 153.250000
 
 def plotCoords(lat, lon):
     # Size of one cell in world coordinates

@@ -8,10 +8,10 @@ import time
 
 def main():
     # bounding box properties (fixed coordinates)
-    lamin = -27.530000  # lower latitude
-    lamax = -27.420000 # higher latitude
-    lomin = 153.000000  # lower longitude
-    lomax = 153.170000  # higher longitude
+    lamin = -27.540000  # lower latitude
+    lamax = -27.410000 # higher latitude
+    lomin = 152.990000  # lower longitude
+    lomax = 153.250000  # higher longitude
 
     #middle coord values for map title
     lamid = lamin + lamax / 2 #-27.500000

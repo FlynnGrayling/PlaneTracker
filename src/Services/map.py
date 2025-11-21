@@ -25,15 +25,17 @@ def generateMap (flights):
     draw = ImageDraw.Draw(image)
 
     try:
-        font = ImageFont.truetype("arial.ttf", 16)
+        font = ImageFont.truetype("arialbd.ttf", 16)
+        font2 = ImageFont.truetype("arial.ttf", 16)
     except:
         font = ImageFont.load_default()
+        font2 = ImageFont.load_default()
 
     #draw HOME Box
     #set name and pixel position
     text = "HOME"
-    text_x = 20
-    text_y = 150
+    text_x = 120
+    text_y = 185
 
     # Get text bounding box
     bbox = draw.textbbox((text_x, text_y), text, font=font)
@@ -54,7 +56,7 @@ def generateMap (flights):
     #draw AIRPORT Box
     #set name and pixel position
     text = "AIRPORT"
-    text_x = 242
+    text_x = 342
     text_y = 20
 
     # Get text bounding box
@@ -81,7 +83,7 @@ def generateMap (flights):
         text_y = plane[4]
 
          # Get text bounding box
-        bbox = draw.textbbox((text_x, text_y), text, font=font)
+        bbox = draw.textbbox((text_x, text_y), text, font=font2)
         text_w = bbox[2] - bbox[0]
         text_h = bbox[3] - bbox[1]
     
@@ -94,7 +96,7 @@ def generateMap (flights):
         draw.rectangle(box_coords, fill="white", outline="black")
 
         # Draw text
-        draw.text((text_x, text_y), text, font=font, fill="black")
+        draw.text((text_x, text_y), text, font=font2, fill="black")
 
     #save and show image
     image.save("map.png")

@@ -104,6 +104,6 @@ def generateHistory(flights, displayHistory):
         draw.text([x + data_x_pos[2], data_y_pos[i]], str(time), font=cell_font, fill="black")
 
     # Save image and display image when appropriate
-    if displayHistory == False:
+    if displayHistory == True:
         img.save("flights_table.png")
         img.show()
