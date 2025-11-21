@@ -40,14 +40,14 @@ def generateHistory(flights, displayHistory):
     print(recent_flight)
 
     # Image settings
-    cell_widths = [120, 300, 170]  # Widths for each column
-    row_height = 55
+    cell_widths = [160, 400, 225]  # Widths for each column
+    row_height = 66
     header_height = 80
     padding = 10
 
     # Calculate image size
-    img_width = 600
-    img_height = 400
+    img_width = 800
+    img_height = 480
 
     # Create blank white image
     img = Image.new("RGB", (img_width, img_height), "white")
@@ -55,9 +55,9 @@ def generateHistory(flights, displayHistory):
 
     # Load font (fallback to default if not available)
     try:
-        header_font = ImageFont.truetype("arialbd.ttf", 28)
-        cell_header = ImageFont.truetype("arial.ttf", 26)
-        cell_font = ImageFont.truetype("arial.ttf", 22)
+        header_font = ImageFont.truetype("arialbd.ttf", 30)
+        cell_header = ImageFont.truetype("arialbd.ttf", 26)
+        cell_font = ImageFont.truetype("arial.ttf", 26)
     except:
         header_font = ImageFont.load_default()
         cell_header = ImageFont.load_default()
@@ -74,11 +74,11 @@ def generateHistory(flights, displayHistory):
     draw.text(((img_width - title_w) / 2, 10), title, font=header_font, fill="black")
 
     # Draw callsign rows
-    y_increment = [0, 55, 110, 165, 220, 275, 330]
-    x = 5
+    y_increment = [0, 65, 130, 195, 260, 325, 390] #[0, 55, 110, 165, 220, 275, 330]
+    x = 6
     y = 55
-    x1 = 125
-    x2 = 425
+    x1 = 165
+    x2 = 562
     for i in range(6):
         draw.rectangle([x, y + y_increment[i], x + cell_widths[0], y + row_height + y_increment[i]], outline="black", width=3)
         draw.rectangle([x1, y + y_increment[i], x1 + cell_widths[1], y + row_height + y_increment[i]], outline="black", width=3)
@@ -88,13 +88,13 @@ def generateHistory(flights, displayHistory):
     headers = ["Callsign", "Departure Country", "Time"]
     
     # Header text
-    header_x_pos = [15, 170, 480]
+    header_x_pos = [30, 245, 640]
     for i, header in enumerate(headers):
         draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
 
     # API Text
-    data_x_pos = [15, 150, 445]
-    data_y_pos = [125, 180, 235, 290, 345]
+    data_x_pos = [25, 190, 600]
+    data_y_pos = [140, 205, 270, 335, 400]
     for i, plane in enumerate(recent_flight):
         callsign = plane[0]
         origin = plane[1]
@@ -104,6 +104,6 @@ def generateHistory(flights, displayHistory):
         draw.text([x + data_x_pos[2], data_y_pos[i]], str(time), font=cell_font, fill="black")
 
     # Save image and display image when appropriate
-    if displayHistory == True:
+    if displayHistory == False:
         img.save("flights_table.png")
         img.show()

@@ -1,5 +1,5 @@
-rows, cols = 4, 6
-height, width = 400, 600
+rows, cols = 4, 8
+height, width = 480, 800
 
 latMin, latMax = -27.58, -27.42
 lonMin, lonMax = 153, 153.17

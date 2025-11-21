@@ -18,3 +18,5 @@ def setImage(flights, displayCount):
     print(displayCount)
     return displayCount
 
+#800 x 480
+

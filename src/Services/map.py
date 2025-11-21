@@ -5,7 +5,7 @@ import time
 
 def generateMap (flights):
     # Create a map (size in pixels)
-    m = StaticMap(600, 400)
+    m = StaticMap(800, 480)
 
     # Add a marker for home (longitude FIRST then latitude)
     marker = CircleMarker((153.030000, -27.466500), 'black', 12)  # Tingalpa
