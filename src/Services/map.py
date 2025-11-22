@@ -100,4 +100,6 @@ def generateMap (flights):
 
     #save and show image
     image.save("map.png")
-    image.show()
+    img = Image.open("map.png").convert('L')
+    img.save("mapGrey.png")
+    img.show()

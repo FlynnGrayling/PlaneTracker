@@ -1,4 +1,4 @@
-rows, cols = 4, 8
+rows, cols = 5, 8
 height, width = 480, 800
 
 latMin, latMax = -27.540000, -27.410000

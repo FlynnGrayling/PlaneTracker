@@ -105,5 +105,6 @@ def generateHistory(flights, displayHistory):
 
     # Save image and display image when appropriate
     if displayHistory == True:
+        img.convert('L')
         img.save("flights_table.png")
         img.show()
