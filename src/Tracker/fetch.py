@@ -1,5 +1,14 @@
 import requests
 import time
+import json
+import os
+
+#get secrets
+cred_path = os.path.join(os.path.dirname(__file__), "credentials.json")
+
+# Load the JSON file
+with open(cred_path, "r") as f:
+    creds = json.load(f)
 
 # OpenSky API base URL
 BASE_URL = "https://opensky-network.org/api/states/all"
@@ -8,8 +17,8 @@ BASE_URL = "https://opensky-network.org/api/states/all"
 TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
 
 #Client credentials
-CLIENT_ID = "xxxxxx"
-CLIENT_SECRET = "xxxxxx"
+CLIENT_ID = creds["clientId"]
+CLIENT_SECRET = creds["clientSecret"]
 
 #Token cache
 TOKEN = None
