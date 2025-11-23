@@ -48,7 +48,7 @@ def main():
         flights = []
 
         #call API
-        data = get_states(params=params, username=username, password=password)
+        data = get_states(params=params)
 
         
 
