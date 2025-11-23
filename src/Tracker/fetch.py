@@ -7,11 +7,11 @@ BASE_URL = "https://opensky-network.org/api/states/all"
 # OAuth2 endpoints
 TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
 
-# Your client credentials
+#Client credentials
 CLIENT_ID = "xxxxxx"
 CLIENT_SECRET = "xxxxxx"
 
-# Token cache
+#Token cache
 TOKEN = None
 TOKEN_EXPIRES_AT = 0
 
