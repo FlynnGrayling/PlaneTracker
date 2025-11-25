@@ -55,13 +55,13 @@ def generateHistory(flights, displayHistory):
 
     # Load font (fallback to default if not available)
     try:
-        header_font = ImageFont.truetype("arialbd.ttf", 30)
-        cell_header = ImageFont.truetype("arialbd.ttf", 26)
-        cell_font = ImageFont.truetype("arial.ttf", 26)
+        header_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+        cell_header = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+        cell_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 26)
     except:
-        header_font = ImageFont.load_default()
-        cell_header = ImageFont.load_default()
-        cell_font = ImageFont.load_default()
+        header_font = ImageFont.load_default(30)
+        cell_header = ImageFont.load_default(30)
+        cell_font = ImageFont.load_default(26)
 
     # Helper function to get text width & height from bbox
     def get_text_size(text, font):

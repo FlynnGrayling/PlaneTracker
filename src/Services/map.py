@@ -25,11 +25,11 @@ def generateMap (flights):
     draw = ImageDraw.Draw(image)
 
     try:
-        font = ImageFont.truetype("arialbd.ttf", 16)
-        font2 = ImageFont.truetype("arial.ttf", 16)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 16)
+        font2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 16)
     except:
-        font = ImageFont.load_default()
-        font2 = ImageFont.load_default()
+        font = ImageFont.load_default(16)
+        font2 = ImageFont.load_default(16)
 
     #draw HOME Box
     #set name and pixel position
@@ -43,7 +43,7 @@ def generateMap (flights):
     text_h = bbox[3] - bbox[1]
 
     # Draw rectangle
-    padding = 4
+    padding = 6
     box_coords = [
         (text_x - padding, text_y - padding),
         (text_x + text_w + padding, text_y + text_h + padding)
@@ -65,7 +65,7 @@ def generateMap (flights):
     text_h = bbox[3] - bbox[1]
 
     # Draw rectangle
-    padding = 4
+    padding = 6
     box_coords = [
         (text_x - padding, text_y - padding),
         (text_x + text_w + padding, text_y + text_h + padding)
@@ -82,13 +82,13 @@ def generateMap (flights):
         text_x = plane[3]
         text_y = plane[4]
 
-         # Get text bounding box
+        # Get text bounding box
         bbox = draw.textbbox((text_x, text_y), text, font=font2)
         text_w = bbox[2] - bbox[0]
         text_h = bbox[3] - bbox[1]
     
         # Draw rectangle
-        padding = 4
+        padding = 6
         box_coords = [
             (text_x - padding, text_y - padding),
             (text_x + text_w + padding, text_y + text_h + padding)
