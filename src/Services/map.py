@@ -1,9 +1,15 @@
 from staticmap import StaticMap, CircleMarker
+from waveshare_epd import epd7in5_V2
 from PIL import Image, ImageDraw, ImageFont
 import time
 
 
 def generateMap (flights):
+    #initialise display
+    epd = epd7in5_V2.EPD()
+    epd.init()
+    epd.Clear()
+
     # Create a map (size in pixels)
     m = StaticMap(800, 480)
 
@@ -100,6 +106,9 @@ def generateMap (flights):
 
     #save and show image
     image.save("map.png")
-    img = Image.open("map.png").convert('L')
+    img = Image.open("map.png").convert('1')
     img.save("mapGrey.png")
-    img.show()
+    # img.show()
+
+    epd.display(epd.getbuffer(img))
+    epd.sleep()

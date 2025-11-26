@@ -1,21 +1,15 @@
 from PIL import Image, ImageDraw, ImageFont
+from waveshare_epd import epd7in5_V2
 from datetime import datetime, timezone, timedelta
 
 # Initialize recent_flight as a global variable
 recent_flight = []
 
 def generateHistory(flights, displayHistory):
-    # Example data (from API)
-    # flights = [
-    #     {"Callsign": "QAZ477", "Departure Country": "Australia", "Time": "06:30am"},
-    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "12:30pm"},
-    #     {"Callsign": "AA2071", "Departure Country": "America", "Time": "12:30pm"},
-    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "01:30pm"},
-    #     {"Callsign": "NAZ307", "Departure Country": "New Zealand", "Time": "09:30pm"},
-    # ]
-
-    #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
-    # flights = [["VOC290", -27.44, 153.0, 0, 0, "", 0],
+    #initialise display
+    epd = epd7in5_V2.EPD()
+    epd.init()
+    epd.Clear()
 
     #recent history list
     global recent_flight
@@ -105,6 +99,9 @@ def generateHistory(flights, displayHistory):
 
     # Save image and display image when appropriate
     if displayHistory == True:
-        img.convert('L')
-        img.save("flights_table.png")
-        img.show()
+        img.convert('1')
+        # img.save("flights_table.png")
+        # img.show()
+
+        epd.display(epd.getbuffer(img))
+        epd.sleep()
