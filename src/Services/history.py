@@ -8,8 +8,6 @@ recent_flight = []
 def generateHistory(flights, displayHistory):
     #initialise display
     epd = epd7in5_V2.EPD()
-    epd.init()
-    epd.Clear()
 
     #recent history list
     global recent_flight
@@ -102,6 +100,10 @@ def generateHistory(flights, displayHistory):
         img.convert('1')
         # img.save("flights_table.png")
         # img.show()
+
+        #initialise and cleaar screen if History is to be shown
+        epd.init()
+        epd.Clear()
 
         epd.display(epd.getbuffer(img))
         epd.sleep()
