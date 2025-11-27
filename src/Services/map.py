@@ -1,6 +1,6 @@
 from staticmap import StaticMap, CircleMarker
 from waveshare_epd import epd7in5_V2
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 import time
 
 
@@ -104,9 +104,11 @@ def generateMap (flights):
         # Draw text
         draw.text((text_x, text_y), text, font=font2, fill="black")
 
-    #save and show image
+    #save and show image + invert colours for darkmode
     image.save("map.png")
     img = Image.open("map.png").convert('1')
+    inverted = ImageOps.invert(img.convert("L")).convert("1")
+    inverted.save("mapInvert.png")
     img.save("mapGrey.png")
     # img.show()
 
