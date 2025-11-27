@@ -3,11 +3,11 @@ from Services import generateHistory
 import time
 
 
-def setImage(flights, displayCount):
+def setImage(flights, displayCount, darkMode):
     
     if len(flights) > 0 and displayCount < 10:
         displayHistory = False
-        generateMap(flights)
+        generateMap(flights, darkMode)
         generateHistory(flights, displayHistory)
         displayCount = displayCount + 1
     else:

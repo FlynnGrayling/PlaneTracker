@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 import time
 
 
-def generateMap (flights):
+def generateMap (flights, darkMode):
     #initialise display
     epd = epd7in5_V2.EPD()
     epd.init()
@@ -104,13 +104,24 @@ def generateMap (flights):
         # Draw text
         draw.text((text_x, text_y), text, font=font2, fill="black")
 
-    #save and show image + invert colours for darkmode
-    image.save("map.png")
-    img = Image.open("map.png").convert('1')
-    inverted = ImageOps.invert(img.convert("L")).convert("1")
-    inverted.save("mapInvert.png")
-    img.save("mapGrey.png")
-    # img.show()
+    #save and show image dependant on darkmode setting
+    if darkMode == True:
+        #Invert map colours
+        image.save("map.png")
+        img = Image.open("map.png").convert('1')
+        inverted = ImageOps.invert(img.convert("L")).convert("1")
+        inverted.save("mapInvert.png")
+        #display inverted map image and sleep screen
+        epd.display(epd.getbuffer(inverted))
+        epd.sleep()
+    else:
+        image.save("map.png")
+        img = Image.open("map.png").convert('1')
+        img.save("mapGrey.png")
+        #display map image and sleep screen
+        epd.display(epd.getbuffer(img))
+        epd.sleep()
+    
+    # img.show() (this is for PC testing)
 
-    epd.display(epd.getbuffer(img))
-    epd.sleep()
+    

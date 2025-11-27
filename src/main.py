@@ -27,18 +27,8 @@ def main():
         "lomax": lomax,
     }
 
-    #flight details for testing list, calsign, lat, lon, pixX, pixY, Origin, Time (Unix)
-    # flights = [["VOC290", -27.44, 153.0, 0, 0, "Australia", 18000],
-    #            ["VOC291", -27.48, 153.15, 0, 0, "Singapore", 27000],
-    #            ["VOC292", -27.5, 153.12, 0, 0, "Brasil", 27000],
-    #            ["VOC293", -27.54, 153.16, 0, 0, "England", 27000],
-    #            ["VOC294", -27.56, 153.0, 0, 0, "New Zealand", 27000],
-    #            ["VOC295", -27.5, 153.1, 0, 0, "Mexico", 27000],]
-
-
-    # Add your OpenSky Network credentials
-    username = ""
-    password = ""
+    #Map darkmode, toggle for white or black map, darkmode is on by default
+    darkMode = True
 
     storedFlights = []  # Initialize before loop
     displayCount = 0
@@ -83,7 +73,7 @@ def main():
         
         if current_callsigns != stored_callsigns:
             print("Flight data changed - updating display")
-            displayCount = setImage(flights, displayCount)
+            displayCount = setImage(flights, displayCount, darkMode)
         else:
             print("No changes detected")
 
