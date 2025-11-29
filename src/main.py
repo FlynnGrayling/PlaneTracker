@@ -61,7 +61,7 @@ def main():
                 print(flights)
             else:
                 #if states is empty set default display
-                displayCount = setImage(flights, displayCount)
+                displayCount = setImage(flights, displayCount, darkMode)
         
         for plane in flights:
             #convert lon/lat to pixelcoords

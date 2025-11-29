@@ -71,7 +71,19 @@ def get_states(params=None):
     token = get_oauth_token()
     if not token:
         print("No valid OAuth token available.")
-        return None
+        try:
+            response = requests.get(BASE_URL, params=params, headers=None)
+
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Error: API call failed with status code {response.status_code}")
+                print(response.text)
+                return None
+
+        except Exception as e:
+            print("Error:", e)
+            return None
 
     headers = {
         "Authorization": f"Bearer {token}"
