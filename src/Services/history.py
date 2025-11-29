@@ -80,7 +80,7 @@ def generateHistory(flights, displayHistory):
     headers = ["Callsign", "Departure Country", "Time"]
     
     # Header text
-    header_x_pos = [30, 245, 640]
+    header_x_pos = [25, 200, 625]
     for i, header in enumerate(headers):
         draw.text([x + header_x_pos[i], y + 15], header, font=cell_header, fill="black")
 
