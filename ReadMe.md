@@ -1,3 +1,7 @@
+
+![FlightTrackerExample](https://github.com/user-attachments/assets/e9e45469-f61e-45da-800c-ef822df8bdf8)
+
+
 ###STEPS FOR SETTING UP RASPBERRY PI
 
 ###add your own ClientID and Clientsecret to fetch.py if available
