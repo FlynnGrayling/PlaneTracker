@@ -1,7 +1,5 @@
 from Tracker import get_states
 from Tracker import plotCoords
-from Services import generateMap
-from Services import generateHistory
 from Display import setImage
 from staticmap import StaticMap, CircleMarker
 import time
