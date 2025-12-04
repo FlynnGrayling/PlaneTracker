@@ -6,14 +6,14 @@ import os
 #get secrets
 cred_path = os.path.join(os.path.dirname(__file__), "credentials.json")
 
-# Load the JSON file
+#load the JSON file
 with open(cred_path, "r") as f:
     creds = json.load(f)
 
-# OpenSky API base URL
+#OpenSky API base URL
 BASE_URL = "https://opensky-network.org/api/states/all"
 
-# OAuth2 endpoints
+#OAuth2 endpoints
 TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
 
 #Client credentials
@@ -26,10 +26,10 @@ TOKEN_EXPIRES_AT = 0
 
 
 def get_oauth_token():
-    """Fetches a new OAuth2 token if expired or not created."""
+    #Fetches a new OAuth2 token if expired or not created.
     global TOKEN, TOKEN_EXPIRES_AT
 
-    # If token is still valid, reuse it
+    #reuse token if it is still valid
     if TOKEN and time.time() < TOKEN_EXPIRES_AT:
         return TOKEN
 
@@ -55,9 +55,9 @@ def get_oauth_token():
 
         token_data = response.json()
         TOKEN = token_data["access_token"]
-        expires_in = token_data.get("expires_in", 300)  # usually 300 seconds (5 min)
+        expires_in = token_data.get("expires_in", 300) 
 
-        TOKEN_EXPIRES_AT = time.time() + expires_in - 10  # refresh slightly early
+        TOKEN_EXPIRES_AT = time.time() + expires_in - 10
 
         return TOKEN
 
@@ -67,7 +67,7 @@ def get_oauth_token():
 
 
 def get_states(params=None):
-    """Fetches OpenSky states using OAuth2 Bearer token."""
+    #Gets Opensky states with OAuth token
     token = get_oauth_token()
     if not token:
         print("No valid OAuth token available.")
