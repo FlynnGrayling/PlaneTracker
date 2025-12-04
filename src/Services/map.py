@@ -1,5 +1,5 @@
 from staticmap import StaticMap, CircleMarker
-from waveshare_epd import epd7in5_V2
+from waveshare_epd import epd7in5_V2 #e-ink display driver, to be installed on raspberry pi (follow read me)
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import time
 
